@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.data, name='home'),  # Добавьте этот путь для корневого URL
-    path('data', views.data, name='data'),
-    path('test', views.test, name='test'),
+    path('', views.home, name='home'),
+    path('data/', views.data, name='data'),
+    path('test/', views.test, name='test'),
+    path('facts/', views.facts, name='facts'),
 ]

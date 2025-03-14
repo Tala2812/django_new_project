@@ -1,9 +1,13 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
+def home(request):
+    return render(request, 'main/home.html')
 
 def data(request):
-    return HttpResponse("<h1>Это страница для разной информации</h1>")
-
+    return render(request, 'main/data.html')
 
 def test(request):
-    return HttpResponse("<h1>Это страница для разных тестов</h1>")
+    return render(request, 'main/test.html')
+
+def facts(request):
+    return render(request, 'main/facts.html')
