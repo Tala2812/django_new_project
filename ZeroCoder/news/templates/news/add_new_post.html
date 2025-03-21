@@ -1,0 +1,69 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  <title>Страница для добавления новостей</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Страница для добавления новостей</h1>
+        <hr class="my-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title">Форма для добавления новостей</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.title.id_for_label }}">Название новости</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <div class="text-danger">
+                                {{ form.title.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.short_description.id_for_label }}">Краткое описание новости</label>
+                        {{ form.short_description }}
+                        {% if form.short_description.errors %}
+                            <div class="text-danger">
+                                {{ form.short_description.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.text.id_for_label }}">Содержание новости</label>
+                        {{ form.text }}
+                        {% if form.text.errors %}
+                            <div class="text-danger">
+                                {{ form.text.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.pub_date.id_for_label }}">Дата и время публикации</label>
+                        {{ form.pub_date }}
+                        {% if form.pub_date.errors %}
+                            <div class="text-danger">
+                                {{ form.pub_date.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.author.id_for_label }}">Автор новости</label>  <!-- Новое поле для автора -->
+                        {{ form.author }}
+                        {% if form.author.errors %}
+                            <div class="text-danger">
+                                {{ form.author.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Добавить новость</button>
+                </form>
+                <p>{{ error }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

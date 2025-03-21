@@ -7,17 +7,35 @@
 {% block content %}
 <div class="jumbotron">
     <h1 class="display-4">Это страница с новостями</h1>
-
-    {% for new in news %}
-      <div>
-        <h3>{{ new.title }}</h3>
-        <p><strong>Краткое описание:</strong> {{ new.short_description }}</p>
-        <p><strong>Текст новости:</strong> {{new.text}}</p>
-        <p><strong>Автор:</strong> {{ new.author.username }}</p>
-        <p><strong>Дата и время публикации:</strong> {{ new.pub_date|date:"d M Y H:i" }}</p>
-      </div>
-      <hr>
-    {% endfor %}
-
+    {% if news %}
+        <div class="row">
+            {% for new in news %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ new.title }}</h5>
+                        <p class="card-text"><strong>Краткое описание:</strong> {{ new.short_description }}</p>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                            Подробнее
+                        </button>
+                        <div class="collapse mt-3" id="collapse{{ forloop.counter }}">
+                            <p><strong>Текст новости:</strong> {{new.text}}</p>
+                            <p><strong>Автор:</strong>
+                                {% if new.author %}
+                                    {{ new.author }}
+                                {% else %}
+                                    Неизвестен
+                                {% endif %}
+                            </p>
+                            <p><strong>Дата и время публикации:</strong> {{ new.pub_date|date:"d M Y H:i" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <h4>Новостей ещё нет.</h4>
+    {% endif %}
 </div>
 {% endblock %}
